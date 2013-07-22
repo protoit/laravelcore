@@ -1,0 +1,1 @@
+<?php foreach($data_table as $data){ ?>	<option><?php echo $data->location_name; ?></option><?php } ?>
