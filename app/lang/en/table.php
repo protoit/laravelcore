@@ -30,5 +30,4 @@ return array(
 	
 	"messages"       	=> "Messages",
 	
-	"confirmed"        => "The :attribute confirmation does not match.",
 );
