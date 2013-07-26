@@ -7,15 +7,6 @@ class LoginController extends BaseController {
 		$data = array();
 		
 		$data['status'] = '';
-				
-		$input = Input::all();
-				
-		$rules = array(
-			'username'  	=> 'required|max:50',
-			'password'  	=> 'required|max:50',
-		);
-		
-		$validation = Validator::make($input, $rules);
 		
 		$data['errors'] = array();
 		
@@ -25,7 +16,7 @@ class LoginController extends BaseController {
 	
 			if (Auth::attempt($credentials))
 			{					
-				return Redirect::to('page');
+				return Redirect::to('home');
 			}
 			else
 			{

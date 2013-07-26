@@ -44,7 +44,10 @@ Route::any('video', 			'VideoController@index');
 
 Route::any('video/search', 		'HomeController@search');
 
-Route::any('reports/service', 		'ReportController@service');
+Route::any('reports/service', 				'ReportController@service');
+Route::any('reports/service/add', 			'ReportController@serviceAdd');
+Route::any('reports/service/edit/{id}', 	'ReportController@serviceEdit');
+Route::any('reports/service/delete/{id}', 	'ReportController@serviceDelete');
 
 
 
@@ -66,6 +69,7 @@ Route::group(array('before' => 'auth'), function()
 {
 	
 	//Route::any('admin/video', 				'VideoController@index');
+	Route::any('home', 						'HomeController@index');
 	Route::any('admin', 					'VideoController@index');
 	Route::any('admin/video', 				'VideoController@index');
 	Route::any('admin/video/add', 	  		'VideoController@add');

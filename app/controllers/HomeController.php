@@ -1,6 +1,6 @@
 <?php
 
-class VideoController extends BaseController {
+class HomeController extends BaseController {
 	
 	/**
 	 * The template to use.
@@ -25,17 +25,10 @@ class VideoController extends BaseController {
 	{	
 		$data = array();
 		
-		$data['title'] = 'Videos';
-		
-		$search = Input::get('search');
-		
+		// Titles should be from language files
+		$data['title'] 			= 'Dashboard';
+		$data['title_small'] 	= '';
 				
-		//$data['rows'] =  $this->video->orderBy('name')->paginate(10);
-		//$data['count'] = $this->video->count();
-		
-		$data['rows'] =  array();
-		$data['count'] = 1;
-		
-		return View::make('video.index', $data);
+		return View::make('home.index', $data);
 	}	
 }

@@ -4,89 +4,14 @@ class ReportController extends BaseController {
                
    protected $layout = 'template';
    
-    function __construct()
+   protected $service;
+   
+   protected $company;
+   
+    function __construct(ServiceReport $service, Company $company)
     {
-       /* parent::__construct();
-            if($this->user || $this->client){
-            foreach ($this->view_data['menu'] as $key => $value) { 
-                if($value->link == "reports"){ $access = TRUE;}
-            }
-            if(!$access){redirect('login');}
-        }else{
-            redirect('login');
-        }
-
-		$this->view_data['reports_create'] = array(
-				 $this->lang->line('application_add_actreport') => 'reports/create_report/service',
-                 $this->lang->line('application_add_announce') => 'reports/create_report/announce',
-				 $this->lang->line('application_add_liftreport') => 'reports/create_report/lift'
-		);
-		
-        	
-		if($this->client){
-			$this->view_data['company_id'] = $this->client->company_id;
-			$companies = Companies::all();
-			
-			foreach($companies as $company){
-				if($this->view_data['company_id'] == $company->id){
-					$company_name = $company->name;	
-				}
-			}
-			
-			$companies = Companies::find('all',array('group' => 'name' , 'conditions' => array('name = ?',$company_name)));
-			
-			foreach($companies as $company){
-				$catname = $company->catname;	
-			}
-			
-			$objectcat = Objectcat::find('all',array('conditions' => array('catname_has_items = ?',$catname)));
-			
-			$this->view_data['submenuactreport_service']['Alle'] = 'reports/filter/service/all';
-			if($objectcat)
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_service'][$cat->catname_has_items] = 'reports/filter/service/'.$cat->id;
-			}
-			
-			$this->view_data['submenuactreport_announce']['Alle'] = 'reports/filter/announce/all';
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_announce'][$cat->catname_has_items] = 'reports/filter/announce/'.$cat->id;
-			}
-			
-			$this->view_data['submenuactreport_lift']['Alle'] = 'reports/filter/lift/all';
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_lift'][$cat->catname_has_items] = 'reports/filter/lift/'.$cat->id;
-			}
-			
-		}		
-		else
-		{
-			$objectcat = Objectcat::all();
-		
-			$this->view_data['submenuactreport_service']['Alle'] = 'reports/filter/service/all';
-			if($objectcat)
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_service'][$cat->catname_has_items] = 'reports/filter/service/'.$cat->id;
-			}
-			
-			$this->view_data['submenuactreport_announce']['Alle'] = 'reports/filter/announce/all';
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_announce'][$cat->catname_has_items] = 'reports/filter/announce/'.$cat->id;
-			}
-			
-			$this->view_data['submenuactreport_lift']['Alle'] = 'reports/filter/lift/all';
-			foreach($objectcat as $cat){
-				if($cat->catname_has_items != '' && $cat->catname_has_items != NULL)
-				$this->view_data['submenuactreport_lift'][$cat->catname_has_items] = 'reports/filter/lift/'.$cat->id;
-			}
-		}
-		
-		*/
-        
+       $this->service = $service;
+	   $this->company = $company;
     }
             
 	function service()
@@ -97,60 +22,66 @@ class ReportController extends BaseController {
 		$data['title'] 			= Lang::get('menu.reports');
 		$data['title_small'] 	= Lang::get('menu.reports_sub.service_reports');
 		
-		$data['rows'] = ServiceReport::all();
+		$data['rows'] = $this->service->with('company')->get();
 		
 		return View::make('reports.service', $data);
 	}
 	
-	
-    function index()
-    {
-		$this->view_data['service_reports'] = Service::find('all');
-		$this->view_data['announce_reports'] = Announce::find('all');
-		$count = Announce::count();
-		for($i=0;$i<$count;$i++){ 		
-			$this->view_data['announce_reports'][$i]->announce_name = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_name);
-			$this->view_data['announce_reports'][$i]->announce_birth = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_birth);
-			$this->view_data['announce_reports'][$i]->announce_ident = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_ident);
-			$this->view_data['announce_reports'][$i]->announce_address = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_address);
-			$this->view_data['announce_reports'][$i]->announce_zipcode = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_zipcode);
-			$this->view_data['announce_reports'][$i]->announce_city = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_city);
-			$this->view_data['announce_reports'][$i]->announce_phone = $this->_decrypt($this->view_data['announce_reports'][$i]->announce_phone);
-			$this->view_data['announce_reports'][$i]->parent_name = $this->_decrypt($this->view_data['announce_reports'][$i]->parent_name );
-			$this->view_data['announce_reports'][$i]->parent_address = $this->_decrypt($this->view_data['announce_reports'][$i]->parent_address);
-			$this->view_data['announce_reports'][$i]->parent_zipcode = $this->_decrypt($this->view_data['announce_reports'][$i]->parent_zipcode);
-			$this->view_data['announce_reports'][$i]->parent_city = $this->_decrypt($this->view_data['announce_reports'][$i]->parent_city);
-			$this->view_data['announce_reports'][$i]->parent_phone = $this->_decrypt($this->view_data['announce_reports'][$i]->parent_phone);
-			$this->view_data['announce_reports'][$i]->witness_name = $this->_decrypt($this->view_data['announce_reports'][$i]->witness_name);
-			$this->view_data['announce_reports'][$i]->witness_address = $this->_decrypt($this->view_data['announce_reports'][$i]->witness_address);
-			$this->view_data['announce_reports'][$i]->witness_zipcode = $this->_decrypt($this->view_data['announce_reports'][$i]->witness_zipcode);
-			$this->view_data['announce_reports'][$i]->witness_city = $this->_decrypt($this->view_data['announce_reports'][$i]->witness_city);
-			$this->view_data['announce_reports'][$i]->witness_phone = $this->_decrypt($this->view_data['announce_reports'][$i]->witness_phone);
+	function serviceAdd()
+	{
+		$data = array();
+		
+		// Titles should be from language files
+		$data['title'] 			= Lang::get('menu.reports');
+		$data['title_small'] 	= Lang::get('menu.reports_sub.service_reports');
+		
+		if (Input::get('op'))
+		{
+			$s = $this->service->fill(Input::all());
+			
+			if($s->save()) return Redirect::to('reports/service');
+			
+			$data['errors'] = $s->errors;
 		}
 		
-		$this->view_data['lift_reports'] = Lift::find('all');
-        $this->view_data['submenuactreport'] = array(
-                         $this->lang->line('application_gt') => 'administration/admintimesheets',
-                         $this->lang->line('application_europark') => 'administration/adminreports',
-                         );    
-        $this->config->load('defaults');
-		if($this->client){
-			$this->view_data['id'] = $this->client;
-			$this->view_data['company_by_id'] = $this->get_company_by_id($this->client->company_id);
-		}else if($this->user){
-			$this->view_data['company_by_id'] = "";
-			$this->view_data['id'] = $this->user;
-        }
+		$data['companies'] = $this->company->orderBy('name')->get();
 		
-		$this->content_view = 'reports/all';
-    }
-	
-	function get_company_by_id($id){
-		$this->load->model('reports_model');
-		$data = $this->reports_model->get_company_by_id($id);
-		return $data->name;
+		return View::make('reports.service-add', $data);
 	}
 	
+	function serviceEdit($id)
+	{
+		
+		$data = array();
+		
+		// Titles should be from language files
+		$data['title'] 			= Lang::get('menu.reports');
+		$data['title_small'] 	= Lang::get('menu.reports_sub.service_reports');
+
+		if (Input::get('op'))
+		{
+			$s = $this->service->find($id);
+			
+			$s->fill(Input::all());
+			
+			if($s->save()) return Redirect::to('reports/service');
+			
+			$data['errors'] = $s->errors;
+		}
+		$data['row'] = $row = $this->service->find($id);
+		
+		$this->company->dropdown($row->company_id); // This will create a dropdown for companies
+		
+		return View::make('reports.service-edit', $data);
+	}
+	
+	function serviceDelete($id)
+	{
+		$this->service->find($id)->delete();
+		return Redirect::to('reports/service');
+	}
+	
+    
 	function edit_report($condition = NULL){
 		
 		$id = $this->uri->segment(4);

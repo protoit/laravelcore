@@ -96,12 +96,14 @@ return array(
 		'Illuminate\Foundation\Providers\KeyGeneratorServiceProvider',
 		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
+		'Illuminate\Foundation\Providers\MaintenanceServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
 		'Illuminate\Foundation\Providers\OptimizeServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
 		'Illuminate\Foundation\Providers\PublisherServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
 		'Illuminate\Redis\RedisServiceProvider',
+		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',
 		'Illuminate\Foundation\Providers\RouteListServiceProvider',
 		'Illuminate\Database\SeedServiceProvider',
@@ -114,6 +116,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		
 		'Intervention\Image\ImageServiceProvider',
+		'Rocketeer\RocketeerServiceProvider',
 
 	),
 
@@ -159,7 +162,7 @@ return array(
 		'File'            => 'Illuminate\Support\Facades\File',
 		'Form'            => 'Illuminate\Support\Facades\Form',
 		'Hash'            => 'Illuminate\Support\Facades\Hash',
-		'Html'            => 'Illuminate\Support\Facades\Html',
+		'HTML'            => 'Illuminate\Support\Facades\HTML',
 		'Input'           => 'Illuminate\Support\Facades\Input',
 		'Lang'            => 'Illuminate\Support\Facades\Lang',
 		'Log'             => 'Illuminate\Support\Facades\Log',
@@ -175,12 +178,14 @@ return array(
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
 		'Session'         => 'Illuminate\Support\Facades\Session',
+		'SSH'             => 'Illuminate\Support\Facades\SSH',
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		
 		'Image' => 'Intervention\Image\Facades\Image',
+		'Rocketeer' => 'Rocketeer\Facades\Rocketeer',
 	),
 
 );

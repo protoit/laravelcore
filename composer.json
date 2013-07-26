@@ -2,7 +2,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"guzzle/guzzle": "3.6.*",
-		"intervention/image": "dev-master"
+		"intervention/image": "dev-master",
+		"anahkiasen/rocketeer": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

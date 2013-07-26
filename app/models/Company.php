@@ -24,6 +24,21 @@ class Company extends BaseModel {
 		//'email'  			=> 'required|email|max:50|unique:gym,email,:id:',
 	);
 	
+	public function dropdown($id)
+	{
+		$companies = Company::orderBy('name')->lists('name', 'id');
+		
+		//$data['row'] = $row = $this->service->find($id);
+		
+		Form::macro('companyDropdown', function() use($companies, $id)
+		{
+			return Form::select('company_id', $companies, $id, array(
+																	'id' 				=> 'company_id', 
+																	'class' 			=> 'span12 select2_category', 
+																	'data-placeholder' 	=> "Customer Name")
+																	);
+		});
+	}
 	
 	
 	
