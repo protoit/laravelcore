@@ -49,10 +49,10 @@
                     <a href="{{ Request::root()}}/reports/service">@lang('menu.reports_sub.service_reports')</a>
                 </li>
                 <li >
-                    <a href="">@lang('menu.reports_sub.announce_reports')</a>
+                    <a href="{{ Request::root()}}/reports/announce">@lang('menu.reports_sub.announce_reports')</a>
                 </li>
                 <li >
-                    <a href="">@lang('menu.reports_sub.lift_reports')</a>
+                    <a href="{{ Request::root()}}/reports/lift">@lang('menu.reports_sub.lift_reports')</a>
                 </li>
             </ul>
         </li>

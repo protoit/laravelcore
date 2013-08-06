@@ -103,6 +103,13 @@
     @yield('page_level_scripts')
     
     <script>
+	
+	function openBrWindow(theURL,winName) { //v2.0
+		  window.open(theURL,winName,'scrollbars=yes,width=800,height=700');
+		  return false;
+	}
+
+	
 	jQuery(document).ready(function() {       
 	   App.init();
 	 });

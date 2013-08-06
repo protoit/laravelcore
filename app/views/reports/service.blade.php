@@ -42,8 +42,8 @@
                         <p>Delete Report?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                         <a href="{{ Request::root()}}/reports/service/delete/" class="btn blue" id="delete_me">Confirm</a>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                     </div>
                 </div>
                 
@@ -83,7 +83,7 @@
                             <td>{{ $row->company->name }}</td>
                             <td>{{ $row->title }}</td>
                             <td>{{ $row->company->object }}</td>
-                            <td>{{ $row->tjenestenr }}</td>
+                            <td>{{ $row->employee_id }}</td>
                             <td>{{ $row->shiftjournal_id }}</td>
                             <td >
                             <a href="{{ Request::root()}}/reports/service/edit/{{ $row->id }}" class="btn mini purple"><i class="icon-edit"></i></a>
@@ -123,31 +123,10 @@
 <script>
 
 
-$(document).on("click", "a[class='btn mini black']", function () {
-		 
-		//$(".modal-body #bookId").val( $(this).data('id') );
-		
-		
-		
+	$(document).on("click", "a[class='btn mini black']", function () {
+			 
 		$("#delete_me").attr("href", "{{ Request::root()}}/reports/service/delete/"+$(this).data('id'));
 		
-		//$("a[class='btn mini black']").val( myBookId );
-		
-		//alert($(this).data('id'));
-		/*
-		 var myBookId = $(this).data('id');
-		 $(".modal-body #bookId").val( myBookId );
-		 
-		 $.post('{{Request::root()}}/gradebook/info', { id: $('#bookId').val() }, function(data) {
-		   $(".modal-body #comment").val( data );
-		  
-		});
-		
-		*/
-		 
-		 // As pointed out in comments, 
-		 // it is superfluous to have to manually call the modal.
-		 // $('#addBookDialog').modal('show');
 	});
 
 

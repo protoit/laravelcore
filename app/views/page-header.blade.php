@@ -55,11 +55,8 @@
                 <a href="{{ Request::root() }}/home">Home</a> 
                 <i class="icon-angle-right"></i>
             </li>
-            <li>
-                <a href="#">Breadcrumb</a>
-                <i class="icon-angle-right"></i>
-            </li>
-            <li><a href="#">Breadcrumb Sub</a></li>
+            @yield('custom_breadcrumbs')
+            <li><a href="#">{{$title}}</a></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
     </div>

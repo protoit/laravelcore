@@ -48,5 +48,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	
+	public function getFirstnameAttribute($value)
+    {
+		return utf8_decode($value);
+    }
+	
+	public function getLastnameAttribute($value)
+    {
+		return utf8_decode($value);
+    }
+	
+	public function getTitleAttribute($value)
+    {
+		return utf8_decode($value);
+    }
+	
+	public static function getPicture($id, $column)
+	{	
+		$u = User::find($id);
+		
+		$userPic = 'uploads/'.$u->$column;
+		$default = 'assets/img/no-image.gif';
+		
+		return (file_exists($userPic) && $u->$column != '') ? $userPic : $default;	
+	}
 
 }

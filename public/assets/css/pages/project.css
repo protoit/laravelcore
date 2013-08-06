@@ -1,0 +1,8 @@
+.project-list tbody tr {
+	cursor: pointer;
+}
+
+.portlet.project-details {
+	background-color: transparent !important;
+}
+

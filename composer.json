@@ -3,7 +3,8 @@
 		"laravel/framework": "4.1.*",
 		"guzzle/guzzle": "3.6.*",
 		"intervention/image": "dev-master",
-		"anahkiasen/rocketeer": "dev-master"
+		"anahkiasen/rocketeer": "dev-master",
+		"itbz/fpdi": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

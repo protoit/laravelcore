@@ -8,10 +8,13 @@ class ReportController extends BaseController {
    
    protected $company;
    
+   protected $pdf;
+   
     function __construct(ServiceReport $service, Company $company)
     {
        $this->service = $service;
 	   $this->company = $company;
+	   $this->pdf = new \fpdi\FPDI();
     }
             
 	function service()
@@ -23,6 +26,33 @@ class ReportController extends BaseController {
 		$data['title_small'] 	= Lang::get('menu.reports_sub.service_reports');
 		
 		$data['rows'] = $this->service->with('company')->get();
+		
+		// add a page
+		$this->pdf->AddPage();
+		// set the sourcefile
+		$this->pdf->setSourceFile('files/template/announce_reports_template.pdf');
+		
+		// select the first page
+		$tplIdx = $this->pdf->importPage(1);
+		
+		// use the page we imported
+		$this->pdf->useTemplate($tplIdx);
+		
+		// set font, font style, font size.
+		$this->pdf->SetFont('Arial', '', 8);
+		
+		// set initial placement
+		$this->pdf->SetXY(40, 22.5);
+		
+		header('Cache-Control: maxage=3600'); //Adjust maxage appropriately
+		
+		header('Pragma: public');
+	
+		// If the parameter is D = download F = save as file
+		
+		$this->pdf->Output('files/output/1.pdf', 'I'); 
+		
+		
 		
 		return View::make('reports.service', $data);
 	}
